@@ -2,30 +2,31 @@ package com.wellsfargo.counselor.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 public class Security {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long securityId;
-
-    private String name;
-    private String category;
-    private LocalDate purchaseDate;
-    private double purchasePrice;
-    private int quantity;
 
     @ManyToOne
     private Portfolio portfolio;
 
+    private String name;
+    private String category;
+    private Date purchaseDate;
+    private double purchasePrice;
+    private int quantity;
+
     public Security() {
     }
 
-    public Security(String name, String category, LocalDate purchaseDate, double purchasePrice, int quantity) {
+    public Security(Portfolio portfolio, String name, String category, Date purchaseDate, double purchasePrice, int quantity) {
+        this.portfolio = portfolio;
         this.name = name;
         this.category = category;
         this.purchaseDate = purchaseDate;
@@ -37,52 +38,10 @@ public class Security {
         return securityId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public LocalDate getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(LocalDate purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public Portfolio getPortfolio() {
         return portfolio;
     }
 
-    public void setPortfolio(Portfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-}
+    public void setPortfolio(Portfolio portfolio)
+
 

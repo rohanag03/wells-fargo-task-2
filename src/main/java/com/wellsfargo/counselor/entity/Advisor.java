@@ -1,86 +1,89 @@
 package com.wellsfargo.counselor.entity;
 
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import java.util.Date;
 
 @Entity
-public class Advisor {
-
+public class Security {
     @Id
-    @GeneratedValue()
-    private long advisorId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long securityId;
 
-    @Column(nullable = false)
-    private String firstName;
+    @ManyToOne
+    private Portfolio portfolio;
 
-    @Column(nullable = false)
-    private String lastName;
+    private String name;
+    private String category;
+    private Date purchaseDate;
+    private double purchasePrice;
+    private int quantity;
 
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
-    private String email;
-
-    protected Advisor() {
-
+    public Security() {
     }
 
-    public Advisor(String firstName, String lastName, String address, String phone, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
+    public Security(Portfolio portfolio, String name, String category, Date purchaseDate, double purchasePrice, int quantity) {
+        this.portfolio = portfolio;
+        this.name = name;
+        this.category = category;
+        this.purchaseDate = purchaseDate;
+        this.purchasePrice = purchasePrice;
+        this.quantity = quantity;
     }
 
-    public Long getAdvisorId() {
-        return advisorId;
+    public Long getSecurityId() {
+        return securityId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Portfolio getPortfolio() {
+        return portfolio;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCategory() {
+        return category;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getPhone() {
-        return phone;
+    public Date getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
-    public String getEmail() {
-        return email;
+    public double getPurchasePrice() {
+        return purchasePrice;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

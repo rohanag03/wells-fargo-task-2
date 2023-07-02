@@ -2,46 +2,31 @@ package com.wellsfargo.counselor.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import java.util.List;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Portfolio {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long portfolioId;
 
-    private String title;
-
-    @OneToMany(mappedBy = "portfolio")
-    private List<Security> securities;
-
-    @OneToOne
+    @ManyToOne
     private Client client;
+
+    private String title;
 
     public Portfolio() {
     }
 
-    public Portfolio(String title) {
+    public Portfolio(Client client, String title) {
+        this.client = client;
         this.title = title;
     }
 
     public Long getPortfolioId() {
         return portfolioId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Security> getSecurities() {
-        return securities;
     }
 
     public Client getClient() {
@@ -51,5 +36,12 @@ public class Portfolio {
     public void setClient(Client client) {
         this.client = client;
     }
-}
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+}
